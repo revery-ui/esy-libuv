@@ -6,11 +6,7 @@
   "license": "MIT",
   "esy": {
     "build": [
-        ["sh", "autogen.sh"],
-        ["./configure #{os=='windows' ? '--host=x86_64-w64-mingw32 CC=x86_64-w64-mingw32-gcc':''} PREFIX=#{self.install}"],
-        ["make"],
-        ["make check"],
-        ["make install"]
+        ["bash", "#{os=='windows' ? './esy/build-windows.sh':'./esy/build.sh'}"]
     ],
     "buildsInSource":true,
     "exportedEnv": {
