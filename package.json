@@ -6,8 +6,11 @@
   "license": "MIT",
   "esy": {
     "build": [
-        ["bash", "-c", "#{os == 'windows' ? './esy/configure-windows.sh' : './esy/configure.sh'}"],
-        ["make", "install"]
+        ["sh", "autogen.sh"],
+        ["./configure #{os=='windows' ? '--host=x86_64-w64-mingw32 CC=x86_64-w64-mingw32-gcc':''} PREFIX=#{self.install}"],
+        ["make"],
+        ["make check"],
+        ["make install"]
     ],
     "buildsInSource":true,
     "exportedEnv": {
@@ -22,6 +25,7 @@
     }
   },
   "dependencies": {
-    "esy-cmake": "^0.3.2"
+    "esy-cmake": "^0.3.2",
+    "esy-libtools": "github:bryphe/esy-libtools#62766a2"
   }
 }
